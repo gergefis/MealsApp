@@ -1,16 +1,18 @@
-package mealsapp.test;
+package api;
 
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class OkHTTPTest {
+public class Api {
     private String args;
     
-    public OkHTTPTest() {
-        this.args = "Saganaki";
+    public Api(/*String args*/) {
+        this.args = "Saganaki"; //args
     }
 
     public String getArgs() {
@@ -26,22 +28,35 @@ public class OkHTTPTest {
     //https://www.themealdb.com/api/json/v1/1/filter.php?c=Seafood
     
 
-   public void callHttp(){
+   public String callHttp(){
+       
       String urlToCall = "https://www.themealdb.com/api/json/v1/1/search.php?s=" + args;
+        String responseString = null;
         
         OkHttpClient client=new OkHttpClient();
         
         Request request = new Request.Builder().url(urlToCall).build();
-        
+
         try (Response response = client.newCall(request).execute()) {
             if (response.isSuccessful() && response.body() != null) {
-                String responseString=response.body().string();
+                 responseString = response.body().string();
                 System.out.println(responseString);
             }
-        }
-        catch (IOException e){
-            e.printStackTrace();
+            
+        }catch (IOException e) {
+      e.printStackTrace();
         } 
-        
+        return responseString;
 }
+   
+  
+  public static void writeToFile(String responseString) {
+    File f = new File("meals.pdf");
+
+    try (FileWriter fileWriter = new FileWriter(f)) {
+      fileWriter.write(responseString);
+    } catch (IOException e) {
+    } 
+}
+        
 }

@@ -2,19 +2,21 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package mealsapp.test;
+package controller;
 
 /**
  *
  * @author dimitris
  */
+import api.Api;
 import com.google.gson.Gson; 
 import com.google.gson.GsonBuilder; 
+import api.Widget;
 
 public class GsonTester{ 
-    
+        
     public void gsonCall() {
-
+        Api ok = new Api();
       String jsonString = "{\"strMeal\":\"strCategory\",  \"name\":21}";  
                             //Files.readString("object.json");
       

@@ -3,13 +3,21 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package main;
+import controller.GsonTester;
+import api.Api;
 
-/**
- *
- * @author dimitris
- */
-public class Main {
+  /**
+     * @param args the command line arguments
+     */
+     public class Main{
     public static void main(String[] args) {
+      Api ok = new Api();
+      GsonTester gs = new GsonTester();
         
-    }
+      String responseString = ok.callHttp();
+        ok.writeToFile(responseString);
+      
+        gs.gsonCall();
+        }
 }
+
