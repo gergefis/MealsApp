@@ -15,8 +15,10 @@ public class MealsApp {
      */
     public static void main(String[] args) {
       OkHTTPTest ok = new OkHTTPTest();
+      GsonTester gs = new GsonTester();
         
         ok.callHttp();
+        gs.gsonCall();
         }
     
 }

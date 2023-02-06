@@ -7,11 +7,23 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class OkHTTPTest {
-    private String args = "Saganaki";
-
-    public OkHTTPTest() {
-    }
+    private String args;
     
+    public OkHTTPTest() {
+        this.args = "Saganaki";
+    }
+
+    public String getArgs() {
+        return args;
+    }
+
+    public void setArgs(String args) {
+        this.args = args;
+    }      
+    
+    //Public API:
+    //http://www.themealdb.com/api/json/v1/1/search.php?s=Arrabiata
+    //https://www.themealdb.com/api/json/v1/1/filter.php?c=Seafood
     
 
    public void callHttp(){
@@ -30,6 +42,6 @@ public class OkHTTPTest {
         catch (IOException e){
             e.printStackTrace();
         } 
+        
 }
-
 }

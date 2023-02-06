@@ -9,11 +9,14 @@ package mealsapp.test;
  * @author dimitris
  */
 import com.google.gson.Gson; 
-import com.google.gson.GsonBuilder;  
+import com.google.gson.GsonBuilder; 
 
-public class GsonTester { 
-   public static void main(String[] args) { 
-      String jsonString = "{\"name\":\"Mahesh\", \"age\":21}"; 
+public class GsonTester{ 
+    
+    public void gsonCall() {
+
+      String jsonString = "{\"strMeal\":\"strCategory\",  \"name\":21}";  
+                            //Files.readString("object.json");
       
       
       // Με χρήση Design Pattern Builder
@@ -26,8 +29,8 @@ public class GsonTester {
       System.out.println(widget);    
       
       jsonString = gson.toJson(widget); 
-      System.out.println(jsonString);  
-   } 
+      System.out.println(jsonString); 
+    }
 }
 
 

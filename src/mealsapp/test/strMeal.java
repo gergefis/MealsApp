@@ -8,7 +8,7 @@ package mealsapp.test;
  *
  * @author dimitris
  */
-public class strMeal {
+public class strMeal extends GsonTester{
     private String name;
 
     public strMeal(String name) {
