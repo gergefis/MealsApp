@@ -8,17 +8,20 @@ package api;
  *
  * @author dimitris
  */
-public class Widget {
-    private String strMeal ;
-    private String strcategory ;
-    private String strArea ;
-    private String strInstructions ;
+public class MealsItems {
+    private String strMeal;
+    private String strCategory;
+    private String strArea;
+    private String strInstructions;
 
-    public Widget(String strMeal, String strcategory, String strArea, String strInstructions) {
+    public MealsItems(String strMeal, String strCategory, String strArea, String strInstructions) {
         this.strMeal = strMeal;
-        this.strcategory = strcategory;
+        this.strCategory = strCategory;
         this.strArea = strArea;
         this.strInstructions = strInstructions;
+    }
+
+    public MealsItems() {
     }
 
     public String getStrMeal() {
@@ -29,12 +32,12 @@ public class Widget {
         this.strMeal = strMeal;
     }
 
-    public String getStrcategory() {
-        return strcategory;
+    public String getStrCategory() {
+        return strCategory;
     }
 
-    public void setStrcategory(String strcategory) {
-        this.strcategory = strcategory;
+    public void setStrCategory(String strCategory) {
+        this.strCategory = strCategory;
     }
 
     public String getStrArea() {
@@ -51,6 +54,17 @@ public class Widget {
 
     public void setStrInstructions(String strInstructions) {
         this.strInstructions = strInstructions;
+    }
+
+    @Override
+    public String toString() {
+        return "MealsItems{" + "strMeal=" + strMeal +
+                ", strCategory=" +"\n"+
+                strCategory +"\n"+
+                ", strArea=" +"\n"+
+                strArea +"\n"+
+                ", strInstructions=" +"\n"+
+                strInstructions + '}';
     }
     
     

@@ -3,8 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/dimitris/Desktop/MealsApp/src/mealsapp/test/MealsApp.java</file>
-            <file>file:/home/dimitris/Desktop/MealsApp/src/mealsapp/test/OkHTTPTest.java</file>
+            <file>file:/home/dimitris/Desktop/MealsApp/src/mealsapp/MealsAppMain.java</file>
+            <file>file:/home/dimitris/Desktop/MealsApp/src/api/Widget.java</file>
+            <file>file:/home/dimitris/Desktop/MealsApp/src/main/Main.java</file>
+            <file>file:/home/dimitris/Desktop/MealsApp/src/api/Api.java</file>
+            <file>file:/home/dimitris/Desktop/MealsApp/src/controller/GsonTester.java</file>
+            <file>file:/home/dimitris/Desktop/MealsApp/src/api/strMeal.java</file>
         </group>
     </open-files>
 </project-private>

@@ -3,8 +3,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package main;
-import controller.GsonTester;
+import controller.JsonGson;
 import api.Api;
+import api.Meals;
+import api.MealsItems;
+import java.util.ArrayList;
+import java.util.List;
+import mealsapp.MealsAppMain;
+import model.FileWriteJson;
 
   /**
      * @param args the command line arguments
@@ -12,12 +18,15 @@ import api.Api;
      public class Main{
     public static void main(String[] args) {
       Api ok = new Api();
-      GsonTester gs = new GsonTester();
+      JsonGson gs = new JsonGson();
         
-      String responseString = ok.callHttp();
-        ok.writeToFile(responseString);
+        String responseString = ok.callHttp();
+        FileWriteJson fw = new FileWriteJson();
+                fw.writeToFileJson(responseString);
       
-        gs.gsonCall();
+               
+        Meals str = gs.gsonCall(responseString);
+        System.out.println(str);
         }
 }
 

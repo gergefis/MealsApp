@@ -40,23 +40,11 @@ public class Api {
         try (Response response = client.newCall(request).execute()) {
             if (response.isSuccessful() && response.body() != null) {
                  responseString = response.body().string();
-                System.out.println(responseString);
             }
             
         }catch (IOException e) {
       e.printStackTrace();
         } 
         return responseString;
-}
-   
-  
-  public static void writeToFile(String responseString) {
-    File f = new File("meals.pdf");
-
-    try (FileWriter fileWriter = new FileWriter(f)) {
-      fileWriter.write(responseString);
-    } catch (IOException e) {
-    } 
-}
-        
+    }   
 }

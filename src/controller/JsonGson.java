@@ -9,16 +9,18 @@ package controller;
  * @author dimitris
  */
 import api.Api;
+import api.Meals;
+import api.MealsItems;
 import com.google.gson.Gson; 
 import com.google.gson.GsonBuilder; 
-import api.Widget;
+import com.google.gson.reflect.TypeToken;
+import java.lang.reflect.Type;
+import java.util.List;
 
-public class GsonTester{ 
+public class JsonGson{ 
         
-    public void gsonCall() {
-        Api ok = new Api();
-      String jsonString = "{\"strMeal\":\"strCategory\",  \"name\":21}";  
-                            //Files.readString("object.json");
+    public Meals gsonCall(String responseString) {
+      String jsonString = responseString;
       
       
       // Με χρήση Design Pattern Builder
@@ -26,12 +28,14 @@ public class GsonTester{
       builder.setPrettyPrinting(); 
       Gson gson = builder.create(); 
       
+      //Εγγραφή δεδομένων JSON
+    Meals meals = gson.fromJson(jsonString, Meals.class); 
       
-      Widget widget = gson.fromJson(jsonString, Widget.class); 
-      System.out.println(widget);    
-      
-      jsonString = gson.toJson(widget); 
+    //read
+      jsonString = gson.toJson(meals); 
       System.out.println(jsonString); 
+      
+      return meals;
     }
 }
 
