@@ -9,12 +9,13 @@ package api;
  * @author dimitris
  */
 public class MealsItems {
+    private int idMeal;
     private String strMeal;
     private String strCategory;
     private String strArea;
     private String strInstructions;
 
-    public MealsItems(String strMeal, String strCategory, String strArea, String strInstructions) {
+    public MealsItems(int id, String strMeal, String strCategory, String strArea, String strInstructions) {
         this.strMeal = strMeal;
         this.strCategory = strCategory;
         this.strArea = strArea;
@@ -23,6 +24,15 @@ public class MealsItems {
 
     public MealsItems() {
     }
+
+    public int getIdMeal() {
+        return idMeal;
+    }
+
+    public void setIdMeal(int idMeal) {
+        this.idMeal = idMeal;
+    }
+    
 
     public String getStrMeal() {
         return strMeal;
@@ -58,7 +68,8 @@ public class MealsItems {
 
     @Override
     public String toString() {
-        return "MealsItems{" + "strMeal=" + strMeal +
+        return "MealsItems{" + "id=" +idMeal +
+                ", strMeal=" + strMeal +
                 ", strCategory=" +"\n"+
                 strCategory +"\n"+
                 ", strArea=" +"\n"+
@@ -66,6 +77,4 @@ public class MealsItems {
                 ", strInstructions=" +"\n"+
                 strInstructions + '}';
     }
-    
-    
 }

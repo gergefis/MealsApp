@@ -4,7 +4,6 @@
  */
 package api;
 
-import controller.JsonGson;
 import java.util.List;
 
 /**
@@ -29,6 +28,4 @@ public class Meals {
         this.meals = meals;
     }
 
-    
-    
 }

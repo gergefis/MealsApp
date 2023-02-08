@@ -8,18 +8,18 @@ package controller;
  *
  * @author dimitris
  */
-import api.Api;
 import api.Meals;
-import api.MealsItems;
 import com.google.gson.Gson; 
 import com.google.gson.GsonBuilder; 
-import com.google.gson.reflect.TypeToken;
-import java.lang.reflect.Type;
-import java.util.List;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import model.FileWriteJson;
 
 public class JsonGson{ 
         
-    public Meals gsonCall(String responseString) {
+    public String gsonCall(String responseString) {
       String jsonString = responseString;
       
       
@@ -29,13 +29,16 @@ public class JsonGson{
       Gson gson = builder.create(); 
       
       //Εγγραφή δεδομένων JSON
-    Meals meals = gson.fromJson(jsonString, Meals.class); 
+    
+        Meals meals = gson.fromJson(jsonString, Meals.class);
+            System.out.println(meals);
       
     //read
-      jsonString = gson.toJson(meals); 
+      jsonString = gson.toJson(meals);
+
       System.out.println(jsonString); 
-      
-      return meals;
+
+      return jsonString;
     }
 }
 

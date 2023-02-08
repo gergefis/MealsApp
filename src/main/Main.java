@@ -6,10 +6,6 @@ package main;
 import controller.JsonGson;
 import api.Api;
 import api.Meals;
-import api.MealsItems;
-import java.util.ArrayList;
-import java.util.List;
-import mealsapp.MealsAppMain;
 import model.FileWriteJson;
 
   /**
@@ -20,13 +16,16 @@ import model.FileWriteJson;
       Api ok = new Api();
       JsonGson gs = new JsonGson();
         
+      //Καταχωρούμε στη ματαβλητή τα δεδομένα του Json
         String responseString = ok.callHttp();
+
+        //Καταχωρούμε σε μεταβλητή τα μορφοποιημένα δεδομένα του Json
+        String str = gs.gsonCall(responseString);
+        //System.out.println(str);
+        
+//        Εγγραφή δεδομένων σε JSON Αρχείο
         FileWriteJson fw = new FileWriteJson();
-                fw.writeToFileJson(responseString);
-      
-               
-        Meals str = gs.gsonCall(responseString);
-        System.out.println(str);
+                fw.writeToFileJson(str);
         }
 }
 
