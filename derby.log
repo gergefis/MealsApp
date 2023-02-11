@@ -1,0 +1,10 @@
+----------------------------------------------------------------
+Sat Feb 11 14:11:18 EET 2023D001 : [0] The Apache Software Foundation - Apache Derby - 10.16.1.1 - (1901046), [1] a816c00e-0186-4063-0b02-000001774e20, [2] /home/dimitris/Επιφάνεια εργασίας/JAVA/MealsApp/mealsappdb, [3] jdk.internal.loader.ClassLoaders$AppClassLoader@75b84c92, [4] file:/home/dimitris/%ce%95%cf%80%ce%b9%cf%86%ce%ac%ce%bd%ce%b5%ce%b9%ce%b1%20%ce%b5%cf%81%ce%b3%ce%b1%cf%83%ce%af%ce%b1%cf%82/JAVA/MealsApp/Derby/db-derby-10.16.1.1-bin/lib/derby.jar
+java.vendor=Private Build
+java.runtime.version=17.0.5+8-Ubuntu-2ubuntu120.04
+user.dir=/home/dimitris/Επιφάνεια εργασίας/JAVA/MealsApp
+os.name=Linux
+os.arch=amd64
+os.version=5.15.0-60-generic
+derby.system.home=null
+C005 : [0] 

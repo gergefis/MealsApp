@@ -8,14 +8,9 @@ package controller;
  *
  * @author dimitris
  */
-import api.Meals;
+import api.MealsJson;
 import com.google.gson.Gson; 
 import com.google.gson.GsonBuilder; 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import model.FileWriteJson;
 
 public class JsonGson{ 
         
@@ -29,15 +24,12 @@ public class JsonGson{
       Gson gson = builder.create(); 
       
       //Εγγραφή δεδομένων JSON
-    
-        Meals meals = gson.fromJson(jsonString, Meals.class);
-            System.out.println(meals);
+        MealsJson meals = gson.fromJson(jsonString, MealsJson.class);
+//            System.out.println(meals);
       
     //read
-      jsonString = gson.toJson(meals);
-
-      System.out.println(jsonString); 
-
+            jsonString = gson.toJson(meals);
+//      System.out.println(jsonString); 
       return jsonString;
     }
 }

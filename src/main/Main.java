@@ -5,8 +5,9 @@
 package main;
 import controller.JsonGson;
 import api.Api;
-import api.Meals;
-import model.FileWriteJson;
+import api.MealsJson;
+import controller.FileWriteJson;
+import service.DB;
 
   /**
      * @param args the command line arguments
@@ -20,12 +21,20 @@ import model.FileWriteJson;
         String responseString = ok.callHttp();
 
         //Καταχωρούμε σε μεταβλητή τα μορφοποιημένα δεδομένα του Json
+        //με το buildΔοκιμή αer design pattern
         String str = gs.gsonCall(responseString);
-        //System.out.println(str);
+        System.out.println(str);
         
 //        Εγγραφή δεδομένων σε JSON Αρχείο
         FileWriteJson fw = new FileWriteJson();
-                fw.writeToFileJson(str);
+                fw.writeToFileJson(str);  
+                
+//       BEGIN Δοκιμή να φέρω τις εγγραφές του πίνακα
+        DB.connect();
+        DB.checkDB();
+        ok.selectAll();
+        DB.close();
+//        END Δοκιμή να φέρω τις εγγραφές του πίνακα
         }
 }
 
