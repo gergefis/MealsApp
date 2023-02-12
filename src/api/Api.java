@@ -1,14 +1,12 @@
 package api;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Query;
 import model.Meals;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import service.DB;
 import static service.DB.connect;
 import static service.DB.em;
 

@@ -5,17 +5,9 @@
 package main;
 import controller.JsonGson;
 import api.Api;
-import api.MealsJson;
 import controller.FileWriteJson;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.util.List;
-import javax.persistence.Persistence;
-import javax.persistence.Query;
-import model.Meals;
 import service.DB;
-import static service.DB.em;
-import static service.DB.emf;
+
 
   /**
      * @param args the command line arguments
@@ -40,7 +32,7 @@ import static service.DB.emf;
                 
 //       BEGIN Δοκιμή να φέρω τις εγγραφές του πίνακα
         DB.checkDB();
-//        DB.connect();
+//        DB.connect(); 
         ok.selectAll();
         DB.close();
 //        END Δοκιμή να φέρω τις εγγραφές του πίνακα
