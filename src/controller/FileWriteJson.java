@@ -15,7 +15,7 @@ import java.io.IOException;
 public class FileWriteJson {
     
      public void writeToFileJson(String responseString) {
-    File f = new File("meals.json");
+    File f = new File("meals.pdf");
 
     try (FileWriter fileWriter = new FileWriter(f)) {
       fileWriter.write(responseString);

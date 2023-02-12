@@ -12,6 +12,7 @@ import javax.persistence.Query;
 import model.Meals;
 
 
+
 /**
  *cd
  * @author dimitris
@@ -44,15 +45,12 @@ public class DB {
     // Επιστρέφει true αν η βάση δεδομένων λειτουργεί
     public static boolean checkDB() {
         try {
-            emf = Persistence.createEntityManagerFactory(UNIT_NAME);
-            em = emf.createEntityManager();
-            
+            connect();
             close();
         } catch (Exception e) {
             return false;
         }
-
-        
         return true;
     }
+    
 }

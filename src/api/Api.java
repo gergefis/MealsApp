@@ -1,6 +1,7 @@
 package api;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Query;
 import model.Meals;
@@ -8,6 +9,8 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import service.DB;
+import static service.DB.connect;
+import static service.DB.em;
 
 public class Api {
 
@@ -50,13 +53,14 @@ public class Api {
         return responseString;
     }
     
-        public static void selectAll(){
+ public static void selectAll(){
             // Aνάκτησης δεδομένων από πίνακα
-//        connect();
-        Query selectMeals = DB.em.createQuery("Meals.findAll", Meals.class);
-        List<Meals> mealsList = selectMeals.getResultList();
-        for (Meals m : mealsList) 
-            System.out.println(m.getId()+", "+ m.getMeal() + 
-                        m.getCategory()+ m.getArea() + ", "+ m.getInstructions());
+        connect();
+        
+        Query selectMeals = em.createNamedQuery("Meals.findAll", Meals.class);
+//        ArrayList<Meals> mealList = new ArrayList<Meals>(selectMeals.getResultList());
+        List<Meals> mealList = selectMeals.getResultList();
+        for(Meals m : mealList) 
+             m.print();
         }
 }
