@@ -8,7 +8,7 @@ package api;
  *
  * @author dimitris
  */
-public class MealsItems {
+public class MealsItems{
     private int idMeal;
     private String strMeal;
     private String strCategory;

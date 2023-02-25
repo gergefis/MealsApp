@@ -8,9 +8,11 @@ package controller;
  *
  * @author dimitris
  */
+import api.MealsItems;
 import api.MealsJson;
 import com.google.gson.Gson; 
 import com.google.gson.GsonBuilder; 
+import com.google.gson.JsonObject;
 
 public class JsonGson{ 
         
@@ -24,8 +26,8 @@ public class JsonGson{
       Gson gson = builder.create(); 
       
       //Εγγραφή δεδομένων JSON
-        MealsJson meals = gson.fromJson(jsonString, MealsJson.class);
-//            System.out.println(meals);
+        JsonObject meals = gson.fromJson(jsonString, JsonObject.class);
+            System.out.println(meals);
       
     //read
             jsonString = gson.toJson(meals);
