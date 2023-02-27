@@ -3,12 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/dimitris/Επιφάνεια%20εργασίας/JAVA/MealsApp/src/view/ChooseMealGUI.java</file>
-            <file>file:/home/dimitris/Επιφάνεια%20εργασίας/JAVA/MealsApp/src/api/Api.java</file>
-            <file>file:/home/dimitris/Επιφάνεια%20εργασίας/JAVA/MealsApp/src/api/CallMeal.java</file>
-            <file>file:/home/dimitris/Επιφάνεια%20εργασίας/JAVA/MealsApp/src/controller/Transaction.java</file>
-            <file>file:/home/dimitris/Επιφάνεια%20εργασίας/JAVA/MealsApp/src/main/Test.java</file>
-            <file>file:/home/dimitris/Επιφάνεια%20εργασίας/JAVA/MealsApp/src/controller/JsonGson.java</file>
+            <file>file:/home/dimitris/Desktop/MealsAppClone/MealsApp/src/api/CallCategory.java</file>
+            <file>file:/home/dimitris/Desktop/MealsAppClone/MealsApp/src/api/CallMeal.java</file>
+            <file>file:/home/dimitris/Desktop/MealsAppClone/MealsApp/src/main/Test.java</file>
+            <file>file:/home/dimitris/Desktop/MealsAppClone/MealsApp/src/api/MealsJson.java</file>
+            <file>file:/home/dimitris/Desktop/MealsAppClone/MealsApp/src/api/Api.java</file>
+            <file>file:/home/dimitris/Desktop/MealsAppClone/MealsApp/src/view/MealsByCategoryGUI.java</file>
+            <file>file:/home/dimitris/Desktop/MealsAppClone/MealsApp/src/service/DB.java</file>
+            <file>file:/home/dimitris/Desktop/MealsAppClone/MealsApp/src/controller/Transaction.java</file>
+            <file>file:/home/dimitris/Desktop/MealsAppClone/MealsApp/src/view/ChooseMealGUI.java</file>
+            <file>file:/home/dimitris/Desktop/MealsAppClone/MealsApp/src/controller/JsonGson.java</file>
+            <file>file:/home/dimitris/Desktop/MealsAppClone/MealsApp/src/api/MealsItems.java</file>
+            <file>file:/home/dimitris/Desktop/MealsAppClone/MealsApp/src/model/Meals.java</file>
         </group>
     </open-files>
 </project-private>

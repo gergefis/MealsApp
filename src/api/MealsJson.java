@@ -4,6 +4,7 @@
  */
 package api;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -11,20 +12,20 @@ import java.util.List;
  * @author dimitris
  */
 public class MealsJson {
-    List <MealsItems> meals;
+    ArrayList <MealsItems> meals;
 
-    public MealsJson(List<MealsItems> items) {
+    public MealsJson(ArrayList<MealsItems> items) {
         this.meals = items;
     }
 
     public MealsJson() {
     }
 
-    public List<MealsItems> getItems() {
+    public ArrayList<MealsItems> getMeals() {
         return meals;
     }
 
-    public void setItems(List<MealsItems> items) {
+    public void setMeals(ArrayList<MealsItems> items) {
         this.meals = items; // TODO: NA ΤΟ ΞΑΝΑ ΔΩ!!!! items ή Μeals?
     }
 

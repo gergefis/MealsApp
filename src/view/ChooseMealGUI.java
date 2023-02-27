@@ -6,16 +6,25 @@ package view;
 
 import api.*;
 import api.CallMeal;
-import com.google.gson.Gson;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import controller.JsonGson;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.persistence.Query;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
+import model.Meals;
+import service.DB;
 
 /**
  *
  * @author Dia
  */
 public class ChooseMealGUI extends javax.swing.JFrame {
+//    DB.connect();
 
     /**
      * Creates new form ChooseMealGUI
@@ -43,7 +52,7 @@ public class ChooseMealGUI extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
-        jButton2 = new javax.swing.JButton();
+        chooseFromComboBox = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -57,7 +66,7 @@ public class ChooseMealGUI extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jScrollPane1 = new javax.swing.JScrollPane();
-        showInstruction = new javax.swing.JTextArea();
+        showInstructions = new javax.swing.JTextArea();
 
         jLabel10.setText("jLabel10");
 
@@ -71,6 +80,7 @@ public class ChooseMealGUI extends javax.swing.JFrame {
         jLabel2.setText("Name of the meal :");
 
         textForMeal.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        textForMeal.setText("spaghetti");
         textForMeal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textForMealActionPerformed(evt);
@@ -95,19 +105,24 @@ public class ChooseMealGUI extends javax.swing.JFrame {
         jComboBox1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBox1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jComboBox1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jComboBox1MouseClicked(evt);
+            }
+        });
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mealapp/choose.png"))); // NOI18N
-        jButton2.setText("Choose");
-        jButton2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        chooseFromComboBox.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        chooseFromComboBox.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mealapp/choose.png"))); // NOI18N
+        chooseFromComboBox.setText("Choose");
+        chooseFromComboBox.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        chooseFromComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                chooseFromComboBoxActionPerformed(evt);
             }
         });
 
@@ -174,9 +189,9 @@ public class ChooseMealGUI extends javax.swing.JFrame {
             }
         });
 
-        showInstruction.setColumns(20);
-        showInstruction.setRows(5);
-        jScrollPane1.setViewportView(showInstruction);
+        showInstructions.setColumns(20);
+        showInstructions.setRows(5);
+        jScrollPane1.setViewportView(showInstructions);
 
         jScrollPane2.setViewportView(jScrollPane1);
 
@@ -212,7 +227,7 @@ public class ChooseMealGUI extends javax.swing.JFrame {
                                     .addComponent(jScrollPane2))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
+                                    .addComponent(chooseFromComboBox, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
                                     .addComponent(searchForMeal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -238,7 +253,7 @@ public class ChooseMealGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(chooseFromComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32)
                 .addComponent(jLabel5)
                 .addGap(18, 18, 18)
@@ -269,32 +284,66 @@ public class ChooseMealGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void searchForMealActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchForMealActionPerformed
-        // TODO add your handling code here:
-        
+        try{
+         Api call = new CallMeal();
+         JsonGson gs = new JsonGson();
+         
 //        Παίρνουμε τα δεδομένα της αναζήτησης του χρήστη
         String name = textForMeal.getText().trim();
-        Api call = new CallMeal();
-        JsonGson gs = new JsonGson();
-        Gson gson = new Gson();
-        
         
 //        Κλήση του API kai μορφοποίηση δεδομένων
         String responseString = call.callHttp(name); 
-        String str = gs.gsonCall(responseString);
+        JsonObject json = gs.gsonCall(responseString);
         
-         JsonObject obj = gson.fromJson(str, JsonObject.class);
-         System.out.println(obj);
-         
-         JsonArray jArray = obj.get("strMeal").getAsJsonArray();
-         System.out.println(jArray);
-//        
-//         for(var key: jsonObject.keySet())
-//       call.selectByName(str);
-//        showMealName.setText(obj.get("strMeal"));
+        // Καταχωρώ της εγγρφές του Array meals
+        JsonArray jArray = json.get("meals").getAsJsonArray();
+        
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
+        
+        //Διατρέχουμε κάθε εγγραφή και παίρνουμε το όνομα για τον αντιστιχήσουμε
+        // στο dropDown menu με κάθε γεύμα 
+//        / Εαν η αναζήτηση επιστρέφει μόνο ένα γεύμα 
+//          τότε εμφανίζει το αποτελέσμα ΑΝΑΖΉΤΗΣΗΣ 
+        if(!(jArray.size()== 1)){
+        for (JsonElement jsonElement : jArray) {
+                        JsonObject jsonObj = jsonElement.getAsJsonObject();
+                        String nameOfMeal = jsonObj.get("strMeal").getAsString();
+                        model.addElement(nameOfMeal); 
+                    }
+        // εμφανίζει τα αποτελέσματα στο dropDown Menu
+        String selectedValue = jComboBox1.getSelectedItem().toString();
+        jComboBox1.setModel(model);
+                }
+        //   αλιώς καταχωρελί στο dropwdown menu όλα τα αποτελέσματα 
+        else {
+            for (var jsonElement : jArray) {
+                                JsonObject jsonObj = jsonElement.getAsJsonObject();
+                                String strMeal = jsonObj.get("strMeal").getAsString();
+                                showMealName.setText(strMeal);
+                                String strCategory = jsonObj.get("strCategory").getAsString();
+                                showCategory.setText(strCategory);
+                                String strArea = jsonObj.get("strArea").getAsString();
+                                showAreaInfo.setText(strArea);
+                                String strInstructions = jsonObj.get("strInstructions").getAsString();
+                                showInstructions.setText(strInstructions);
+                            }
+        }
+        }catch(IllegalStateException e){
+            String message = "No Result! \n" 
+                    + "Wrong Name of Meal, please try again with correct name."
+                    + "\nOr check \"meals by category\".";
+            JOptionPane.showMessageDialog(rootPane, message);
+        }
+        
     }//GEN-LAST:event_searchForMealActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
+        // επιλέγουμε το γεύμα μόνο με  κλίκ με το ποντίκι 
+        Object object = evt.getSource();
+            if (object == jComboBox1) {
+                chooseFromComboBoxActionPerformed(evt);
+
+        }
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void showMealNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showMealNameActionPerformed
@@ -324,12 +373,78 @@ public class ChooseMealGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_showAreaInfoActionPerformed
 
     private void textForMealActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textForMealActionPerformed
-        // TODO add your handling code here:
+        // Επιλέγουμε και με ENTER το κείμενο προς αναζήτηση
+        Object object = evt.getSource();
+            if (object == textForMeal) {
+                searchForMealActionPerformed(evt);
+
+        }
     }//GEN-LAST:event_textForMealActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void chooseFromComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chooseFromComboBoxActionPerformed
+try {
+//            Query query = em.createNamedQuery("Meal.findByStrmeal");
+//            query.setParameter("strmeal", jComboBox1.getSelectedItem().toString());
+//
+//            //Ελέγχουμε εάν υπάρχουν δεδομένα στην Database
+//            if (query.getResultList().isEmpty()) {
+        Api call = new CallMeal();
+         JsonGson gs = new JsonGson();
+
+//        Παίρνουμε τα δεδομένα της αναζήτησης του χρήστη από το comboBox
+        String mealName = jComboBox1.getSelectedItem().toString();
+        
+//        Κλήση του API kai μορφοποίηση δεδομένων
+        String responseString = call.callHttp(mealName); 
+        JsonObject json = gs.gsonCall(responseString);
+        
+        // Καταχωρώ της εγγρφές του Array meals
+        JsonArray jArray = json.get("meals").getAsJsonArray();
+        
+        
+        //Διαπερνώ τα meals και 
+        //Βάζω τις εγγραφές του πίνακα στα αντοίστιχα fileds
+                            for (var jsonElement : jArray) {
+                                JsonObject m = jsonElement.getAsJsonObject();
+                                String strMeal = m.get("strMeal").getAsString();
+                                showMealName.setText(strMeal);
+                                String strCategory = m.get("strCategory").getAsString();
+                                showCategory.setText(strCategory);
+                                String strArea = m.get("strArea").getAsString();
+                                showAreaInfo.setText(strArea);
+                                String strInstructions = m.get("strInstructions").getAsString();
+                                showInstructions.setText(strInstructions);
+                            }
+//            }
+//            else {
+//                //Εντοπίζω το αντικείμενο
+//                Meals meal = (Meals) query.getSingleResult();
+//                //Αυξάνω την προβολή του Γεύματος
+//////////////////meal.counter();
+////Ενημερώνω το γεύμα στην βάση
+//                mealController.edit(meal);
+//                
+//                //Στέλνω τις πληροφορίες του γεύματος στο GUI
+//                String idMeal = meal.getIdmeal().toString();
+//                jTextField5.setText(idMeal);
+//                String strMeal = meal.getStrmeal();
+//                jTextField2.setText(strMeal);
+//                String strCategory = meal.getStrcategory();
+//                jTextField3.setText(strCategory);
+//                String strArea = meal.getStrarea();
+//                jTextField4.setText(strArea);
+//                String strInstructions = meal.getStrinstructions();
+//                jTextArea1.setText(strInstructions);
+//            }
+                    } catch (Exception e) {
+                        System.out.println(e);
+                    }
+
+    }//GEN-LAST:event_chooseFromComboBoxActionPerformed
+
+    private void jComboBox1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBox1MouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jComboBox1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -369,7 +484,7 @@ public class ChooseMealGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton chooseFromComboBox;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
@@ -389,7 +504,7 @@ public class ChooseMealGUI extends javax.swing.JFrame {
     private javax.swing.JButton searchForMeal;
     private javax.swing.JTextField showAreaInfo;
     private javax.swing.JTextField showCategory;
-    private javax.swing.JTextArea showInstruction;
+    private javax.swing.JTextArea showInstructions;
     private javax.swing.JTextField showMealName;
     private javax.swing.JTextField textForMeal;
     // End of variables declaration//GEN-END:variables

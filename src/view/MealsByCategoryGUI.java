@@ -4,6 +4,19 @@
  */
 package view;
 
+import api.Api;
+import api.CallCategory;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import controller.JsonGson;
+import javax.swing.DefaultComboBoxModel;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
 /**
  *
  * @author Dia
@@ -15,6 +28,55 @@ public class MealsByCategoryGUI extends javax.swing.JFrame {
      */
     public MealsByCategoryGUI() {
         initComponents();
+        try {
+            //Το url που θα καλέσουμε
+            String urlToCall = "https://www.themealdb.com/api/json/v1/1/categories.php";
+
+            //Δημιουργούμε ένα αντικείμενο OkHttpClient 
+            OkHttpClient client = new OkHttpClient();
+            //Δημιουργούμε ένα αντικείμενο Request με όρισμα το url που θα καλέσουμε 
+            Request request = new Request.Builder().url(urlToCall).build();
+
+            //Ξεκινάμε και ζητάμε το url και ελέγχουμε εάν μας φέρνει αποτελέσματα
+            try (okhttp3.Response response = client.newCall(request).execute()) {
+
+                if (response.isSuccessful() && response.body() != null) {
+
+                    //Καταχωρούμε σε ένα String το αποτέλεσμα
+                    String responseString = response.body().string();
+                    //System.out.println(responseString);
+
+                    //Δημιουργούμε ένα αντικείμενο GsonBuilder
+                    GsonBuilder builder = new GsonBuilder();
+                    builder.setPrettyPrinting();
+                    Gson gson = builder.create();
+
+                    //Πέρνουμε τα αποτελέσματα σε JsonObject 
+                    JsonObject json = gson.fromJson(responseString, JsonObject.class);
+
+                    //Δημιουργούμε ένα JsonArray
+                    JsonArray categoriesArray = json.get("categories").getAsJsonArray();
+
+                    //Δημιουργώ ένα ComboBoxModel
+                    DefaultComboBoxModel model = new DefaultComboBoxModel();
+
+                    //Διαπερνάω τα categories
+                    for (JsonElement jsonElement : categoriesArray) {
+                        JsonObject m = jsonElement.getAsJsonObject();
+                        String strCategory = m.get("strCategory").getAsString();
+                        model.addElement(strCategory);
+                    }
+                    
+                    //Προσθέτω τα meals στο jComboBox1
+                    jComboBox1.setModel(model);
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        
     }
 
     /**
@@ -50,6 +112,11 @@ public class MealsByCategoryGUI extends javax.swing.JFrame {
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBox1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButton1.setText("Show meals");
@@ -116,8 +183,41 @@ public class MealsByCategoryGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        Api call = new CallCategory();
+        JsonGson gs = new JsonGson();
+        
+        // Επιλογή γευμάτων από από ComboBox
+        String setCategory = jComboBox1.getSelectedItem().toString();
+
+        String responseString = call.callHttp(setCategory); 
+
+//        Κλήση του API kai μορφοποίηση δεδομένων
+        JsonObject json = gs.gsonCall(responseString);
+        
+         // Καταχωρώ της εγγρφές του Array meals
+        JsonArray jArray = json.get("meals").getAsJsonArray(); 
+        
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
+        try{
+        // for each loop για διπέραση των στοιχείων του πίνακα
+         for(JsonElement jsonElement: jArray){
+             JsonObject jsonObj = jsonElement.getAsJsonObject();
+             String nameOfcategory = jsonObj.get("strMeal").getAsString();
+             model.addElement(nameOfcategory);
+         }
+     
+         
+         jList1.setModel(model);
+         }catch(Exception e){
+             System.out.println(e);
+         }
+         
+         
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     /**
      * @param args the command line arguments
